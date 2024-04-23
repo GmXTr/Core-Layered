@@ -1,0 +1,47 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row row-cols-1 row-cols-md-3 g-3">
+    @foreach (var item in Model.Posts)
+    {
+        <div class="col">
+            <div class="card bg-white border-0">
+                @if (string.IsNullOrEmpty(item.FeaturedImage))
+                {
+                    <img src="https://placeholder.co/800x450" class="card-img-top" alt="@item.Title" />
+                }
+                else
+                {
+                    <img src="@item.FeaturedImage" class="card-img-top" alt="@item.Title" />
+                }
+                
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted">
+                            @item.CategoryName
+                        </small>
+                        <small class="text-danger text-end">
+                            @item.PublishDate.ToLongDateString()
+                        </small>
+                    </div>
+                    <h5>@item.Title</h5>
+                    <p>
+                        @item.ShortContent
+                    </p>
+                    <p class="fw-bold text-uppercase">
+                        @foreach (var tag in item.Tags)
+                        {
+                            <a href="#" class="text-decoration-none me-1 link-danger">
+                                <small>#@tag</small>
+                            </a>
+                        }
+                    </p>
+                    <a href="#" class="link-dark">Read more...</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

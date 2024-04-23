@@ -1,0 +1,103 @@
+﻿@page
+@model UI.Web.Pages.Dashboard.CreateModel
+<form method="post" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+    @Html.AntiForgeryToken()
+    <div class="col-md-4">
+        <div class="form-floating">
+            <input class="form-control" asp-for="Input.Title" required>
+            <label asp-for="Input.Title"></label>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Looks fail!
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-floating">
+            <input class="form-control" asp-for="Input.Subtitle">
+            <label asp-for="Input.Subtitle"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-floating">
+            <select asp-items="Model.Categories" class="form-control" asp-for="Input.CategoryId" required>
+                <option selected disabled value="">Choose...</option>
+            </select>
+            <label asp-for="Input.CategoryId"></label>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Looks fail!
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-floating">
+            <textarea asp-for="Input.Content" class="form-control" required></textarea>
+            <label asp-for="Input.Content"></label>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Looks fail!
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-floating">
+            <input class="form-control" asp-for="Input.PublishDate" required>
+            <label asp-for="Input.PublishDate"></label>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Looks fail!
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-floating">
+            <input asp-for="Input.Tags" class="form-control">
+            <label asp-for="Input.Tags"></label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Input.FeaturedImage"></label>
+        <input asp-for="Input.FeaturedImage" class="form-control">
+    </div>
+    <div class="col-12">
+        <div class="form-check form-switch">
+            <input class="form-check-input" role="switch" asp-for="Input.Draft">
+            <label class="form-check-label" asp-for="Input.Draft"></label>
+            <button type="submit" class="btn btn-dark btn-sm">Create Post</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+}

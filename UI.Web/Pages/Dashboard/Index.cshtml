@@ -1,0 +1,60 @@
+﻿@page
+@model UI.Web.Pages.Dashboard.IndexModel
+@{
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1>Blog Posts</h1>
+        <a asp-page="create" class="btn btn-outline-dark btn-sm">Create a New Post!</a>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-striped table-hover" id="posts">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Publish Date</th>
+                    <th>Category</th>
+                    <th>Tags</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Posts)
+                {
+
+                    <tr>
+                        <td>
+                            <a asp-page="edit" asp-route-id="@item.Id">
+                                @item.Title
+                            </a>
+                        </td>
+                        <td>@item.PublishDate.ToLongDateString()</td>
+                        <td>@item.CategoryName</td>
+                        <td>@string.Join(", ",item.Tags)</td>
+                    </tr>
+
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Title</th>
+                    <th>Publish Date</th>
+                    <th>Category</th>
+                    <th>Tags</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.1/js/dataTables.bootstrap5.js"></script>
+    <script>
+        new DataTable('#posts');
+    </script>
+}
+
+@section Styles{
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.bootstrap5.css" />
+}
